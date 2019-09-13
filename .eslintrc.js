@@ -8,7 +8,6 @@ module.exports = {
     Atomics: 'readonly',
     SharedArrayBuffer: 'readonly',
   },
-  parser: 'babel-eslint',
   parserOptions: {
     ecmaFeatures: {
       jsx: true,
@@ -16,7 +15,7 @@ module.exports = {
     ecmaVersion: 2018,
     sourceType: 'module',
   },
-  plugins: ['react', 'prettier'],
+  plugins: ['react', 'import', 'prettier'],
   rules: {
     'prettier/prettier': 'error',
     'react/jsx-filename-extension': ['warn', { extensions: ['.jsx', '.js'] }],
@@ -25,7 +24,7 @@ module.exports = {
   settings: {
     'import/resolver': {
       'babel-plugin-root-import': {
-        rootPathSufix: 'src',
+        rootPathSuffix: 'src',
       },
     },
   },
