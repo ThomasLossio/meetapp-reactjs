@@ -20,6 +20,7 @@ export default function Header() {
               <Link to="/profile">Meu perfil</Link>
             </div>
           </Profile>
+          <button type="button">Sair</button>
         </aside>
       </Content>
     </Container>
