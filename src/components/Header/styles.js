@@ -15,10 +15,8 @@ export const Content = styled.div`
   align-items: center;
 
   img {
-    margin-right: 20px;
-    padding-right: 20px;
-    height: 50px;
-    width: 50px;
+    height: 32px;
+    width: 32px;
   }
 
   aside {
