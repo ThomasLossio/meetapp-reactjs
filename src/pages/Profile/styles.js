@@ -40,6 +40,7 @@ export const Container = styled.div`
 
     button {
       margin: 5px 0 0;
+      padding: 0 20px;
       width: 160px;
       height: 44px;
       align-self: flex-end;
@@ -50,20 +51,11 @@ export const Container = styled.div`
       border-radius: 4px;
       font-size: 16px;
       transition: background 0.2s;
+      display: flex;
+      justify-content: space-between;
 
       &:hover {
         background: ${darken(0.03, '#f94d6a')};
-      }
-    }
-
-    a {
-      color: #fff;
-      margin-top: 15px;
-      font-size: 16px;
-      opacity: 0.8;
-
-      &:hover {
-        opacity: 1;
       }
     }
   }

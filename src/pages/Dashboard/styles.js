@@ -29,6 +29,7 @@ export const Container = styled.div`
       border: 0;
       border-radius: 4px;
       font-size: 16px;
+      font-weight: bold;
       transition: background 0.2s;
       display: flex;
       justify-content: space-between;
@@ -52,6 +53,7 @@ export const List = styled.ul`
 
     &:hover {
       cursor: pointer;
+      background: rgba(0, 0, 0, 0.2);
     }
   }
 `;

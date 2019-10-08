@@ -33,6 +33,7 @@ export const Content = styled.div`
     border: 0;
     border-radius: 4px;
     font-size: 16px;
+    font-weight: bold;
     transition: background 0.2s;
 
     &:hover {

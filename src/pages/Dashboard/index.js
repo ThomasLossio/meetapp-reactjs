@@ -1,10 +1,34 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { format, parseISO } from 'date-fns';
+import pt from 'date-fns/locale/pt';
 import { MdAddCircleOutline, MdChevronRight } from 'react-icons/md';
 import api from '~/services/api';
 
 import { Container, List, ContentList } from './styles';
 
 export default function Dashboard() {
+  const [meetups, setMeetups] = useState([]);
+
+  useEffect(() => {
+    async function loadMeetups() {
+      const response = await api.get('organizing', {
+        params: { page: 1 },
+      });
+
+      response.data.map(meetup => {
+        meetup.date_and_hour = format(
+          parseISO(meetup.date_and_hour),
+          "d 'de' MMMM', às' HH'h'",
+          { locale: pt }
+        );
+      });
+
+      setMeetups(response.data);
+    }
+
+    loadMeetups();
+  }, []);
+
   return (
     <Container>
       <header>
@@ -15,42 +39,17 @@ export default function Dashboard() {
       </header>
 
       <List>
-        <li>
-          <ContentList>
-            <strong>Meetup de React Native</strong>
-            <div>
-              <p>24 de junho, às 20h</p>{' '}
-              <MdChevronRight size={24} color="#fff" />
-            </div>
-          </ContentList>
-        </li>
-        <li>
-          <ContentList>
-            <strong>NodeJS Meetup</strong>
-            <div>
-              <p>17 de Julho, às 13h</p>{' '}
-              <MdChevronRight size={24} color="#fff" />
-            </div>
-          </ContentList>
-        </li>
-        <li>
-          <ContentList>
-            <strong>Rocketseat Meetup</strong>
-            <div>
-              <p>30 de agosto, às 20h</p>{' '}
-              <MdChevronRight size={24} color="#fff" />
-            </div>
-          </ContentList>
-        </li>
-        <li>
-          <ContentList>
-            <strong>React on the house!</strong>
-            <div>
-              <p>17 de Novembro, às 16h</p>{' '}
-              <MdChevronRight size={24} color="#fff" />
-            </div>
-          </ContentList>
-        </li>
+        {meetups.map(meetup => (
+          <li key={meetup.id}>
+            <ContentList>
+              <strong>{meetup.title}</strong>
+              <div>
+                <p>{meetup.date_and_hour}</p>{' '}
+                <MdChevronRight size={24} color="#fff" />
+              </div>
+            </ContentList>
+          </li>
+        ))}
       </List>
     </Container>
   );
