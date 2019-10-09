@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 import { darken } from 'polished';
 
 export const Container = styled.div`
@@ -45,24 +46,21 @@ export const List = styled.ul`
   margin-top: 45px;
   display: flex;
   flex-direction: column;
-
-  li {
-    height: 62px;
-    background: rgba(0, 0, 0, 0.1);
-    margin-bottom: 10px;
-
-    &:hover {
-      cursor: pointer;
-      background: rgba(0, 0, 0, 0.2);
-    }
-  }
 `;
 
-export const ContentList = styled.div`
+export const ContentList = styled(Link)`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin: 20px;
+  padding: 20px;
+  margin-bottom: 10px;
+  height: 62px;
+  background: rgba(0, 0, 0, 0.1);
+
+  &:hover {
+    cursor: pointer;
+    background: rgba(0, 0, 0, 0.2);
+  }
 
   strong {
     color: #fff;
@@ -77,6 +75,27 @@ export const ContentList = styled.div`
       color: #999;
       font-weight: 16px;
       margin-right: 20px;
+    }
+  }
+`;
+
+export const Pagination = styled.div`
+  align-self: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 30px;
+
+  span {
+    padding: 8px 10px;
+    font-size: 20px;
+    color: #fff;
+    text-decoration: none;
+    transition: background-color 0.2s;
+
+    &:hover {
+      cursor: pointer;
+      background-color: rgba(255, 255, 255, 0.3);
     }
   }
 `;
