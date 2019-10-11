@@ -21,9 +21,8 @@ export const Container = styled.div`
 
     button {
       margin: 5px 0 0;
-      padding: 0 20px;
-      width: 160px;
-      height: 44px;
+      padding: 10px 15px;
+      width: 150px;
       align-self: flex-end;
       background: #f94d6a;
       color: #fff;
@@ -33,6 +32,7 @@ export const Container = styled.div`
       font-weight: bold;
       transition: background 0.2s;
       display: flex;
+      align-items: center;
       justify-content: space-between;
 
       &:hover {
