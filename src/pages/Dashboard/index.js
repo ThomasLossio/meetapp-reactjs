@@ -1,11 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { format, parseISO } from 'date-fns';
 import pt from 'date-fns/locale/pt';
-import {
-  MdAddCircleOutline,
-  MdChevronLeft,
-  MdChevronRight,
-} from 'react-icons/md';
+import { MdAddCircleOutline, MdChevronRight } from 'react-icons/md';
 import api from '~/services/api';
 
 import { Container, List, ContentList, MeetupListed } from './styles';

@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useState, useEffect, useSelector } from 'react';
+import { format, parseISO } from 'date-fns';
+import pt from 'date-fns/locale/pt';
 import {
   MdModeEdit,
   MdDeleteForever,
@@ -7,12 +9,38 @@ import {
 } from 'react-icons/md';
 
 import { Container, DateAndLocale } from './styles';
+import api from '~/services/api';
 
 export default function MeetupDetail({ match }) {
+  const [meetup, setMeetup] = useState([]);
+  const [banner, setBanner] = useState([]);
+  const { id } = match.params;
+
+  useEffect(() => {
+    async function loadMeetup() {
+      const response = await api.get(`organizing/${id}`);
+
+      const data = {
+        ...response.data,
+        dateFormatted: format(
+          parseISO(response.data.date_and_hour),
+          "d 'de' MMMM', às' HH'h'",
+          { locale: pt }
+        ),
+      };
+
+      setMeetup(data);
+      if (data.banner) {
+        setBanner(data.banner);
+      }
+    }
+    loadMeetup();
+  }, [id]);
+
   return (
     <Container>
       <header>
-        <strong>Meetup de React Native</strong>
+        <strong>{meetup.title}</strong>
         <div>
           <button type="button">
             <MdModeEdit size={20} /> Editar
@@ -24,25 +52,20 @@ export default function MeetupDetail({ match }) {
       </header>
 
       <img
-        src="https://miro.medium.com/max/1200/1*iW7i51bEZSnoPwGgWW93Kg.jpeg"
+        src={
+          banner.url ||
+          'https://ak1.ostkcdn.com//images/products/is/images/direct/7b6c3256bfe728cf81c9be8ec0d56b62da59571e/Title-Unavailable.jpg'
+        }
         alt="meetup"
       />
 
-      <p>
-        O Meetup de React Native é um evento que reúne a comunidade de
-        desenvolvimento mobile utilizando React a fim de compartilhar
-        conhecimento. Todos são convidados.
-        <br />
-        <br />
-        Caso queira participar como palestrante do meetup envie um e-mail para
-        organizacao@meetuprn.com.br
-      </p>
+      <p>{meetup.description}</p>
 
       <DateAndLocale>
         <MdEvent size={20} color="#999" />
-        <span>24 de junho, às 20h</span>
+        <span>{meetup.dateFormatted}</span>
         <MdLocationOn size={20} color="#999" />
-        <span>Rua Guilherme Gembala, 260</span>
+        <span>{meetup.localization}</span>
       </DateAndLocale>
     </Container>
   );

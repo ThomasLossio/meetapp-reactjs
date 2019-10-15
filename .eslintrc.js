@@ -21,14 +21,10 @@ module.exports = {
     'react/jsx-filename-extension': ['warn', { extensions: ['.jsx', '.js'] }],
     'import/prefer-default-export': 'off',
     'no-param-reassign': 'off',
-<<<<<<< HEAD
     'react/jsx-props-no-spreading': 'off',
     'no-console': ['error', { allow: ['tron'] }],
     'react-hooks/rules-of-hooks': 'error',
     'react-hooks/exhaustive-deps': 'warn',
-=======
-    'react/jsx-props-no-spreading': 'off'
->>>>>>> 3c2c632227dae33101f9f473694119517357e88c
   },
   settings: {
     'import/resolver': {
