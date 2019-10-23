@@ -67,7 +67,7 @@ export const Container = styled.div`
       color: #fff;
       border: 0;
       border-radius: 4px;
-      font-size: 16px;
+      font-size: 14px;
       transition: background 0.2s;
       display: flex;
       justify-content: space-between;

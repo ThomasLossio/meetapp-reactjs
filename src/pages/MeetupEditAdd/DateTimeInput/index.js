@@ -8,7 +8,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 
 export default function DatePicker({ name }) {
   registerLocale('pt', pt);
-  const ref = useRef(null);
+  const ref = useRef();
   const { fieldName, registerField, defaultValue, error } = useField(name);
   const [selected, setSelected] = useState(defaultValue);
 
