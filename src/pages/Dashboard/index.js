@@ -3,8 +3,9 @@ import { format, parseISO } from 'date-fns';
 import pt from 'date-fns/locale/pt';
 import { MdAddCircleOutline, MdChevronRight } from 'react-icons/md';
 import api from '~/services/api';
+import history from '~/services/history';
 
-import { Container, List, ContentList, MeetupListed } from './styles';
+import { Container, List, ContentList } from './styles';
 
 export default function Dashboard() {
   const [meetups, setMeetups] = useState([]);
@@ -30,19 +31,23 @@ export default function Dashboard() {
     loadMeetups();
   }, []);
 
+  function handleNew() {
+    history.push('/meetup/new');
+  }
+
   return (
     <Container>
       <header>
         <strong>Meus meetups</strong>
 
-        <button type="button">
+        <button type="button" onClick={handleNew}>
           <MdAddCircleOutline size={18} /> Novo meetup
         </button>
       </header>
 
       <List>
         {meetups.map(meetup => (
-          <ContentList key={meetup.id} to={`/organizing/${meetup.id}`}>
+          <ContentList key={meetup.id} to={`/meetup/detail/${meetup.id}`}>
             <strong>{meetup.title}</strong>
             <div>
               <p>{meetup.dateFormatted}</p>{' '}
