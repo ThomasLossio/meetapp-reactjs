@@ -7,9 +7,12 @@ import {
   MdEvent,
   MdLocationOn,
 } from 'react-icons/md';
+import { toast } from 'react-toastify';
 
 import { Container, DateAndLocale } from './styles';
 import api from '~/services/api';
+
+import history from '~/services/history';
 
 export default function MeetupDetail({ match }) {
   const [meetup, setMeetup] = useState([]);
@@ -37,6 +40,22 @@ export default function MeetupDetail({ match }) {
     loadMeetup();
   }, [id]);
 
+  async function handleCancel(data) {
+    if (!meetup.cancelable) {
+      toast.error('Este meetup não pode ser cancelado!');
+      return;
+    }
+
+    const response = await api.delete(`meetups/${meetup.id}`);
+
+    if (response.status === 204) {
+      toast.success('Meetup cancelado com sucesso!');
+      history.push('/dashboard');
+    } else {
+      toast.error('Algo deu errado, tente novamente mais tarde!');
+    }
+  }
+
   return (
     <Container>
       <header>
@@ -45,7 +64,7 @@ export default function MeetupDetail({ match }) {
           <button type="button">
             <MdModeEdit size={20} /> Editar
           </button>
-          <button type="button">
+          <button type="button" onClick={handleCancel}>
             <MdDeleteForever size={20} /> Cancelar
           </button>
         </div>
