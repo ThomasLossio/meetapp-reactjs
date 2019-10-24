@@ -7,6 +7,7 @@ import { toast } from 'react-toastify';
 import api from '~/services/api';
 
 import DateTimeInput from './DateTimeInput';
+import BannerInput from './BannerInput';
 import { Container } from './styles';
 
 const schema = Yup.object().shape({
@@ -16,6 +17,7 @@ const schema = Yup.object().shape({
     .min(new Date(), 'Não é possível cadastrar datas passadas')
     .required('Data é obrigatório'),
   localization: Yup.string().required('Localização é obrigatório'),
+  banner_id: Yup.number(),
 });
 
 export default function MeetupEditAdd({ match }) {
@@ -43,6 +45,7 @@ export default function MeetupEditAdd({ match }) {
   return (
     <Container>
       <Form schema={schema} onSubmit={handleSubmit}>
+        <BannerInput name="banner_id" />
         <Input name="title" placeholder="Título do meetup" />
         <Input name="description" multiline placeholder="Descrição completa" />
         <DateTimeInput name="date_and_hour" />
