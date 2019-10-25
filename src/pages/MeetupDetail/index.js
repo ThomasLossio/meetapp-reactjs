@@ -40,7 +40,7 @@ export default function MeetupDetail({ match }) {
     loadMeetup();
   }, [id]);
 
-  async function handleCancel(data) {
+  async function handleCancel() {
     if (!meetup.cancelable) {
       toast.error('Este meetup não pode ser cancelado!');
       return;
@@ -56,12 +56,21 @@ export default function MeetupDetail({ match }) {
     }
   }
 
+  async function handleEdit() {
+    if (!meetup.cancelable) {
+      toast.error('Este meetup não pode ser editado!');
+      return;
+    }
+
+    history.push(`/meetup/edit/${meetup.id}`);
+  }
+
   return (
     <Container>
       <header>
         <strong>{meetup.title}</strong>
         <div>
-          <button type="button">
+          <button type="button" onClick={handleEdit}>
             <MdModeEdit size={20} /> Editar
           </button>
           <button type="button" onClick={handleCancel}>

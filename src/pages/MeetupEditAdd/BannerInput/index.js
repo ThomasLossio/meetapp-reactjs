@@ -8,22 +8,22 @@ import ChoosePicture from '../../../assets/selecionarimagem.png';
 
 export default function BannerInput() {
   const ref = useRef();
-  const { defaultValue, registerField } = useField('banner');
+  const { defaultValue, registerField, fieldName } = useField('user');
 
   const [file, setFile] = useState(defaultValue && defaultValue.id);
   const [preview, setPreview] = useState(defaultValue && defaultValue.url);
 
   useEffect(() => {
-    if (ref.current) {
-      registerField({
-        name: 'banner_id',
-        ref: ref.current,
-        path: 'dataset.file',
-      });
-    }
-  }, [ref, registerField]);
+    registerField({
+      name: 'banner_id',
+      ref: ref.current,
+      path: 'dataset.file',
+    });
+  }, [ref, fieldName]); // eslint-disable-line
 
   async function handleChange(e) {
+    console.tron.log(file);
+    console.tron.log(preview);
     const data = new FormData();
 
     data.append('file', e.target.files[0]);

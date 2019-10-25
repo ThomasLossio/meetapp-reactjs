@@ -6,15 +6,17 @@ import { useField } from '@rocketseat/unform';
 
 import 'react-datepicker/dist/react-datepicker.css';
 
-export default function DatePicker({ name }) {
+export default function DatePicker() {
   registerLocale('pt', pt);
   const ref = useRef();
-  const { fieldName, registerField, defaultValue, error } = useField(name);
+  const { fieldName, registerField, defaultValue, error } = useField(
+    'date_and_hour'
+  );
   const [selected, setSelected] = useState(defaultValue);
 
   useEffect(() => {
     registerField({
-      name: fieldName,
+      name: 'date_and_hour',
       ref: ref.current,
       path: 'props.selected',
       clearValue: pickerRef => {

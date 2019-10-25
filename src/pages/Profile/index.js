@@ -14,6 +14,15 @@ const schema = Yup.object().shape({
   email: Yup.string()
     .email('Insira um e-mail válido')
     .required('O e-mail é obrigatório'),
+  oldPassword: Yup.string(),
+  password: Yup.string(),
+  confirmPassword: Yup.string().when('password', (password, field) =>
+    password
+      ? field
+          .required('obrigatório')
+          .oneOf([Yup.ref('password')], 'Senha divergente da nova senha')
+      : field
+  ),
 });
 
 export default function Profile() {
